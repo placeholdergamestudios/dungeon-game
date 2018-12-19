@@ -1,8 +1,6 @@
 package org.md2.worldmanagement;
 
 import org.jbox2d.common.Vec2;
-import org.joml.Vector4f;
-import org.md2.common.Tools;
 import org.md2.gameobjects.item.Item;
 import org.md2.input.Button;
 import org.md2.main.Game;

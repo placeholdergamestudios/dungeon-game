@@ -1,7 +1,6 @@
 package org.md2.worldmanagement;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
 import org.jbox2d.collision.Manifold;

@@ -52,7 +52,7 @@ public class Game
         aim = new AIManager(mm.getWorldManager());
         bm = new ButtonManager();
         //svm.save("test");
-        svm.load("test");
+        //svm.load("test");
         gr.setInput(ki);
         setRunning(true); 
         mm.start();
