@@ -123,6 +123,9 @@ public class MechanicManager extends Thread
             if(KeyboardInput.isPressed(KeyboardInput.ACTION_BACK) || KeyboardInput.isPressed(KeyboardInput.ACTION_DELETE)){
 
             }
+            if(KeyboardInput.isPressed(KeyboardInput.ACTION_SELECT)){
+                inv.onClick();
+            }
         }
         else if(Game.getGame().getMenue() == Game.M_ESC){
         	if(KeyboardInput.isPressed(KeyboardInput.ACTION_ESC)){

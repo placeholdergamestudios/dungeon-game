@@ -24,8 +24,8 @@ public class Game
     private MechanicManager mm;
     private SoundManager sm;
     private SaveManager svm;
-    private AIManager aim;
     private ButtonManager bm;
+    private AIManager aim;
     private static Game game;
     
     private static boolean threadsLocked;
@@ -45,12 +45,12 @@ public class Game
     {
         menue = M_INGAME;
         sm = new SoundManager();
-        gr = new GraphicRendererV2();
         ki = new KeyboardInput();
+        gr = new GraphicRendererV2();
+        bm = new ButtonManager();
         mm = new MechanicManager();
         svm = new SaveManager();
         aim = new AIManager(mm.getWorldManager());
-        bm = new ButtonManager();
         //svm.save("test");
         //svm.load("test");
         gr.setInput(ki);
@@ -103,11 +103,6 @@ public class Game
         return gr;
     }
 
-    public ButtonManager getButtonManager()
-    {
-        return bm;
-    }
-
     public MechanicManager getMechanicManager()
     {
         return mm;
@@ -116,6 +111,11 @@ public class Game
     public SoundManager getSoundManager() {return sm;}
 
     public AIManager getAIManager() {return aim;}
+
+    public ButtonManager getButtonManager()
+    {
+        return bm;
+    }
 
     public static Game getGame()
     {

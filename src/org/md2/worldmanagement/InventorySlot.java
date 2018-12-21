@@ -1,6 +1,7 @@
 package org.md2.worldmanagement;
 
 import org.jbox2d.common.Vec2;
+import org.md2.common.Tools;
 import org.md2.gameobjects.item.Item;
 import org.md2.input.Button;
 import org.md2.main.Game;
@@ -14,12 +15,7 @@ public class InventorySlot extends Button
 
     public InventorySlot(Vec2 coordinates, Vec2 size, Texture slotTexture)
     {
-        super(coordinates, size, Game.M_INVENTORY,  new Texture[]{Texture.INVENTORY_SLOT});
-    }
-
-    @Override
-    protected void performAction() {
-
+        super(coordinates, size,  new Texture[]{Texture.INVENTORY_SLOT});
     }
 
     public boolean addItem(Item i)

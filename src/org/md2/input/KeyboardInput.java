@@ -1,7 +1,12 @@
 package org.md2.input;
 
+import org.jbox2d.common.Vec2;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import org.md2.main.Game;
+import org.md2.rendering.Texture;
+
+import java.util.ArrayList;
 
 public class KeyboardInput extends GLFWKeyCallback
 {
@@ -20,16 +25,15 @@ public class KeyboardInput extends GLFWKeyCallback
     public static int ACTION_QUICKUSE3 = GLFW.GLFW_KEY_Q;
     public static int ACTION_SELECT = GLFW.GLFW_MOUSE_BUTTON_1;
     
-    public static int M_ESC_BUTTON_BACK = 0;
-	public static int M_ESC_BUTTON_CLOSE_GAME = 1;
+
+
     
-    private static boolean keyboardUnlocked;
+    private static boolean keyboardUnlocked = false;
 	private static boolean[] keyPushed = new boolean[348];
 	private static boolean[] keyDisabled = new boolean[348];
-	
+
 	public KeyboardInput()
 	{
-		keyboardUnlocked = false;
 	}
 	
 	@Override
@@ -45,6 +49,8 @@ public class KeyboardInput extends GLFWKeyCallback
 		keyPushed[button] = GLFW.GLFW_RELEASE != action;
 		if(keyDisabled[button] && GLFW.GLFW_RELEASE == action)
 			enableKey(button);
+		if(keyboardUnlocked && button == ACTION_SELECT)
+			Game.getGame().getButtonManager().invokeButtons(action);
 	}
 	
 	public void unlockKeyboard(boolean b)

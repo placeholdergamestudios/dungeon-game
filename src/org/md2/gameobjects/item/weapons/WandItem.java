@@ -30,7 +30,7 @@ public abstract class WandItem extends CompositeWeapon {
         Vec2 entityPos = user.getPosition().add(mousePos.mul(0.5F+0.5F*this.getWeaponSize()));
         WorldObject wo = new Wand(user, this);
         worldManager.spawnObjectAt(wo, entityPos);
-        this.getPart2().onUse(user, this);
+        this.getPart3().onUse(user, this);
         setCurrentlyInUse(true);
         return true;
     }

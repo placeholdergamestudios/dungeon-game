@@ -19,6 +19,11 @@ public class Tools
     {
         return new Vec2(vector.x, vector.y);
     }
+
+	public static Vector2f vec2fToVector2f(Vec2 vector)
+	{
+		return new Vector2f(vector.x, vector.y);
+	}
 	
 	public static float[] createRectTextureVBO()
 	{

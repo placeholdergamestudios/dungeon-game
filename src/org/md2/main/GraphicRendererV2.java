@@ -21,6 +21,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.opengl.*;
+import org.md2.input.Button;
 import org.md2.rendering.ShaderProgram;
 import org.md2.rendering.Texture;
 import org.md2.rendering.TextureObject;
@@ -63,7 +64,9 @@ public class GraphicRendererV2 extends Thread
     private HashMap<VAOType, VertexArrayObject> VAOs;
     private HashMap<Texture, TextureObject> TOs;
     public static Vector2f renderDistance;
-    
+
+
+
     public GraphicRendererV2()
     {
     	
@@ -163,13 +166,13 @@ public class GraphicRendererV2 extends Thread
 		vao = VAOs.get(VAOType.UNITSQUARE);
 
 		for(InventorySlot invSlot: slots){
-			matrix = getTransformationMatrix(new Vector2f(invSlot.getCoordinates().x, invSlot.getCoordinates().y), 0, invSlot.getSize().x*2);
+			matrix = getTransformationMatrix(Tools.vec2fToVector2f(invSlot.getCoordinates()), 0, invSlot.getSize().x*2);
 			Texture[] t = invSlot.getTexture();
 			renderIngameObject(vao, t, matrix);
 
 			Item i = invSlot.getItem();
 			if(i == null) continue;
-			Vector4f itemTrans = new Vector4f(new Vector2f(invSlot.getCoordinates().x, invSlot.getCoordinates().y), 0, invSlot.getSize().x*2*0.75F);
+			Vector4f itemTrans = new Vector4f(Tools.vec2fToVector2f(invSlot.getCoordinates()), 0, invSlot.getSize().x*2*0.75F);
 			matrix = getTransformationMatrix(itemTrans);
 			t = invSlot.getItem().getTextures();
 			renderIngameObject(vao, t, matrix);
@@ -287,13 +290,21 @@ public class GraphicRendererV2 extends Thread
 	
 	private void renderEscapeMenue() 
 	{
+		renderButtons(ButtonManager.M__BUTTONS);
+	}
+
+	public void renderButtons(int[] buttonIndices)
+	{
+		Button[] bs = Game.getGame().getButtonManager().getButtons();
 		shaderProgram.bind();
 		shaderProgram.setUniform("projectionMatrix", new Matrix4f().ortho(-1f, 1f, -1f, 1f, zNear, zFar));
-		Matrix4f matrix = getTransformationMatrix(new Vector2f(0, 0), 0, 1f);
-		VertexArrayObject vao = VAOs.get(VAOType.FULLSCREEN);
-		TextureObject to = TOs.get(Texture.ESCAPE_MENUE);
-		renderRectObject(vao, to, matrix);
-        shaderProgram.unbind();
+		for(int i = 0; i < buttonIndices.length; i++){
+			Button b = bs[buttonIndices[i]];
+			Matrix4f matrix = getTransformationMatrix(Tools.vec2fToVector2f(b.getCoordinates()), 0, b.getSize().x, b.getSize().y);
+			VertexArrayObject vao = VAOs.get(VAOType.UNITSQUARE);
+			renderIngameObject(vao, b.getTexture(), matrix);
+		}
+		shaderProgram.unbind();
 	}
     
     private Matrix4f getTransformationMatrix(Vector2f offset, float rotation, float scale)

@@ -54,22 +54,17 @@ public class Inventory
 //		return cursor;
 //	}
 
-//	public void onClick()
-//	{
-//		for(InventorySlot invSlot: allSlots){
-//			if(invSlot.wasClicked()){
-//				if(cursor != null && cursor.equals(invSlot))
-//				{
-//					//TODO: Move this to the specific item
-//					//if(heldInMouse instanceof BowItem && isHotbarSlot(invSlot))
-//					//	Game.getGame().getSoundManager().playSoundID(SoundManager.SOUNDBOWEQUIP);
-//					heldInMouse = invSlot.switchItem(heldInMouse);
-//				}
-//				else
-//					cursor = invSlot;
-//			}
-//		}
-//	}
+	public void onClick()
+	{
+		for(InventorySlot invSlot: allSlots){
+			if(invSlot.wasClicked()){
+					//TODO: Move this to the specific item
+					//if(heldInMouse instanceof BowItem && isHotbarSlot(invSlot))
+					//	Game.getGame().getSoundManager().playSoundID(SoundManager.SOUNDBOWEQUIP);
+					heldInMouse = invSlot.switchItem(heldInMouse);
+			}
+		}
+	}
 
 	public boolean add(Item i)
 	{
